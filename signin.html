@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In - InclusiveSync</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #F8FAFC;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .signin-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary-custom {
+            background-color: #5B8DEF;
+            border: none;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #4A7BDC;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-5">
+        <div class="signin-card">
+
+            <h3 class="text-center mb-4 fw-bold">Welcome Back</h3>
+
+            <!-- Alert Message -->
+            <div id="alertBox" class="alert d-none"></div>
+
+            <form id="signinForm">
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-primary-custom">
+                        Sign In
+                    </button>
+                </div>
+
+            </form>
+
+            <p class="text-center mt-3">
+                Don’t have an account?
+                <a href="signup.html">Sign Up</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById("signinForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const alertBox = document.getElementById("alertBox");
+
+    // Mock credentials
+    const mockEmail = "admin@test.com";
+    const mockPassword = "123456";
+
+    if (email === mockEmail && password === mockPassword) {
+        
+        // Store fake token
+        localStorage.setItem("token", "mock-jwt-token-123");
+
+        alertBox.className = "alert alert-success";
+        alertBox.innerText = "Login successful! Redirecting...";
+        alertBox.classList.remove("d-none");
+
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1500);
+
+    } else {
+        alertBox.className = "alert alert-danger";
+        alertBox.innerText = "Invalid email or password.";
+        alertBox.classList.remove("d-none");
+    }
+});
+</script>
+
+</body>
+</html>
